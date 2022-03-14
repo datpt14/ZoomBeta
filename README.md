@@ -1,2 +1,2 @@
-# famo
-Store Manager
+# Zoom SDK Beta
+Zoom SDK Beta

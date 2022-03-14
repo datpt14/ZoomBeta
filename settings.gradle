@@ -1,2 +1,4 @@
-rootProject.name = "Famo"
+rootProject.name = "Zoom STT Beta"
 include ':app'
+include ':commonlib'
+include ':mobilertc'

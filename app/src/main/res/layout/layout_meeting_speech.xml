@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/container_meeting_content"
+    android:background="@color/bg_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvListContent"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_5"
+        android:layout_height="@dimen/dp_350"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rcvListContent">
+
+        <ImageView
+            android:id="@+id/ivContentDetail"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:layout_weight=".6"
+            android:foreground="?selectableItemBackground"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_content_detail"
+            app:tint="@color/gray" />
+
+        <ImageView
+            android:id="@+id/ivContentTranslate"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_content_translate" />
+
+        <ImageView
+            android:id="@+id/ivContentSetting"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_content_setting" />
+
+        <ImageView
+            android:id="@+id/ivContentDownload"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_weight=".6"
+            android:foreground="?selectableItemBackground"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_content_download" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,45 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.inis.famo.ui.screen.activity.main.MainViewModel" />
+            type="com.zoomstt.beta.ui.screen.activity.main.JoinViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="167dp"
+            android:background="#3E6097">
 
-            <FrameLayout
-                android:id="@+id/container_main_activity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/mainViewPaper"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_main_logo" />
         </FrameLayout>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation"
-            style="@style/Widget.MaterialComponents.BottomAppBar"
+        <TextView
+            android:id="@+id/tvJoinClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="Join Class"
+            android:textColor="#3E6097"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_school"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom_navigation_background"
-            android:elevation="@dimen/dp_8"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation" />
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_40">
 
+            <EditText
+                android:id="@+id/input_school"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="School name"
+                android:textColor="#3E6097"
+                android:textColorHint="#3E6097"
+                android:textSize="@dimen/sp_20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30">
+
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Name"
+                android:textColor="#3E6097"
+                android:textColorHint="#3E6097"
+                android:textSize="@dimen/sp_20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_classId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30">
+
+            <EditText
+                android:id="@+id/input_classId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Class Id"
+                android:inputType="numberDecimal"
+                android:textColor="#3E6097"
+                android:textColorHint="#3E6097"
+                android:textSize="@dimen/sp_20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_30">
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#3E6097"
+                android:textColorHint="#3E6097"
+                android:textSize="@dimen/sp_20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnJoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="53dp"
+            android:layout_marginTop="@dimen/dp_50"
+            android:background="@drawable/bg_bt_join"
+            android:text="Join"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
     </LinearLayout>
 </layout>

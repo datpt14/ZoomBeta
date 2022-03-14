@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#808080</color>
     <color name="gray50">#80808080</color>
+    <color name="bg_content">#99686767</color>
     <color name="progressbar_bg_tint">#EBECF0</color>
 
 
@@ -24,7 +25,7 @@
     <color name="bg_card_view">#01C5AD</color>
 
     // splash
-    <color name="splash_loading">#CC0FA958</color>
+    <color name="splash_loading">#3E6097</color>
 
     // home
     <color name="home_background">#252A48</color>
@@ -35,4 +36,20 @@
 
     //login
     <color name="login_background_bt">#F4F4F4</color>
+
+
+    // warehouse
+    <color name="child_title_color">#686363</color>
+
+    <color name="meeting_content">#33000000</color>
+    
+    // color setting
+    <color name="color1">#AAA8A9</color>
+    <color name="color2">#2AA9E0</color>
+    <color name="color3">#00FE2A</color>
+    <color name="color4">#DC4386</color>
+    <color name="color5">#EA8046</color>
+    <color name="color6">#FFFFFF</color>
+    <color name="color7">#FE0036</color>
+    <color name="color8">#F2D54D</color>
 </resources>

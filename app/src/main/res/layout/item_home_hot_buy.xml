@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.inis.famo.data.model.BestSellingEntity" />
+            type="com.zoomstt.beta.data.model.BestSellingEntity" />
     </data>
 
     <androidx.cardview.widget.CardView

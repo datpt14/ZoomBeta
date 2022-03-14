@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_layout_setting">
+
+    <ImageView
+        android:id="@+id/ivLanguageSettings"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_20"
+        android:src="@drawable/ic_language_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivCloseSetting"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_margin="@dimen/dp_20"
+        android:src="@drawable/ic_close_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvColorMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="11dp"
+        android:text="My color"
+        android:textColor="#EEF1FA"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLanguageSettings" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvColorMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvColorMe"
+        app:spanCount="4"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_color_select" />
+
+    <TextView
+        android:id="@+id/tvColorFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:paddingHorizontal="11dp"
+        android:text="Friend’s color"
+        android:textColor="#EEF1FA"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rcvColorMe" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvColorFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvColorFriends"
+        app:spanCount="4"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_color_select" />
+
+    <TextView
+        android:id="@+id/tvFontSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_35"
+        android:paddingHorizontal="11dp"
+        android:text="Font size"
+        android:textColor="#EEF1FA"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rcvColorFriend" />
+
+    <SeekBar
+        android:id="@+id/processBarFontSize"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:max="100"
+        android:progress="55"
+        app:layout_constraintEnd_toStartOf="@id/tvValueFontSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFontSize" />
+
+    <TextView
+        android:id="@+id/tvValueFontSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="11dp"
+        android:text="55%"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/processBarFontSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/processBarFontSize"
+        app:layout_constraintTop_toTopOf="@id/processBarFontSize" />
+
+    <TextView
+        android:id="@+id/tvTransparency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_35"
+        android:paddingHorizontal="11dp"
+        android:text="Transparency"
+        android:textColor="#EEF1FA"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/processBarFontSize" />
+
+    <SeekBar
+        android:id="@+id/processBarTransparency"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:max="100"
+        android:progress="55"
+        app:layout_constraintEnd_toStartOf="@id/tvValueTransparency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTransparency" />
+
+    <TextView
+        android:id="@+id/tvValueTransparency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="11dp"
+        android:text="55%"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/processBarTransparency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/processBarTransparency"
+        app:layout_constraintTop_toTopOf="@id/processBarTransparency" />
+
+
+    <TextView
+        android:id="@+id/tvActionCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_35"
+        android:layout_marginStart="@dimen/dp_24"
+        android:text="Cancel"
+        android:textColor="#EEF1FA"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/processBarTransparency" />
+
+    <TextView
+        android:id="@+id/tvActionSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:paddingHorizontal="11dp"
+        android:text="Save"
+        android:textColor="#13C83B"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/processBarTransparency" />
+</androidx.constraintlayout.widget.ConstraintLayout>

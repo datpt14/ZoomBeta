@@ -7,13 +7,13 @@ plugins {
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.inis.famo"
+        applicationId "com.zoomstt.beta"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -78,13 +78,14 @@ android {
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    implementation project(path: ':commonlib')
+    implementation project(path: ':mobilertc')
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -107,9 +108,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //Room
-    implementation 'androidx.room:room-rxjava2:2.3.0-beta01'
-    implementation "androidx.room:room-runtime:2.2.6"
-    kapt "androidx.room:room-compiler:2.3.0-beta01"
+    implementation 'androidx.room:room-rxjava2:2.4.1'
+    implementation "androidx.room:room-runtime:2.4.1"
+    kapt "androidx.room:room-compiler:2.4.1"
+
 
     //loading
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -124,12 +126,10 @@ dependencies {
     // secure sensitive data but it require min-sdk = 23 (Android 6)
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
 
-    // Swipe Refresh layout
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation 'com.microsoft.signalr:signalr:5.0.5'
+    implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
-    // replace {x.y.z} with the latest version.
-    implementation "com.github.XunMengWinter:CircularAnim:0.4.6"
+    // parce json
+    implementation 'com.beust:klaxon:5.5'
 
-    // looping viewpaper
-    implementation 'com.kenilt.loopingviewpager:loopingviewpager:0.2.0'
 }
