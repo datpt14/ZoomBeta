@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.zoomstt.beta.R
 import com.zoomstt.beta.TemporaryDataHelper
-import com.zoomstt.beta.databinding.ActivityMainBinding
+import com.zoomstt.beta.databinding.ActivityJoinMeetingBinding
 import com.zoomstt.beta.ui.base.BaseActivity
 import com.zoomstt.beta.zoombeta.MyMeetingActivity
 import com.zoomstt.beta.zoombeta.SimpleInMeetingListener
@@ -25,7 +25,7 @@ import com.zoomstt.beta.zoombeta.zoommeetingui.ZoomMeetingUISettingHelper
 import us.zoom.sdk.*
 
 
-class JoinActivity : BaseActivity<ActivityMainBinding, JoinViewModel>(R.layout.activity_main),
+class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.layout.activity_join_meeting),
     MeetingServiceListener, MeetingAudioCallback.AudioEvent, InitAuthSDKCallback {
 
     private var TAG = "JoinActivity"
@@ -78,7 +78,7 @@ class JoinActivity : BaseActivity<ActivityMainBinding, JoinViewModel>(R.layout.a
         return JoinViewModel::class.java
     }
 
-    override fun ActivityMainBinding.addEvent() {
+    override fun ActivityJoinMeetingBinding.addEvent() {
 
         btnJoin.setOnClickListener {
             ZoomSDK.getInstance().meetingSettingsHelper.isCustomizedMeetingUIEnabled = true
@@ -142,7 +142,7 @@ class JoinActivity : BaseActivity<ActivityMainBinding, JoinViewModel>(R.layout.a
         }
     }
 
-    override fun ActivityMainBinding.initView() {
+    override fun ActivityJoinMeetingBinding.initView() {
     }
 
     private fun initZoomSDK() {
