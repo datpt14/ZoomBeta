@@ -31,7 +31,6 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
     private var TAG = "JoinActivity"
 
     private var mZoomSDK: ZoomSDK? = null
-    private var recognizer: SpeechRecognizer? = null
 
     private var mInMeetingService: InMeetingService? = null
 
@@ -83,7 +82,7 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
         btnJoin.setOnClickListener {
             ZoomSDK.getInstance().meetingSettingsHelper.isCustomizedMeetingUIEnabled = true
 
-            if (!mZoomSDK!!.isInitialized) {
+            if (mZoomSDK?.isInitialized == false) {
                 InitAuthSDKHelper.getInstance().initSDK(applicationContext, this@JoinActivity)
                 return@setOnClickListener
             }
@@ -104,6 +103,12 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_join_meeting)
+
+        if (savedInstanceState == null) {
+            Log.d(TAG, "onCreate: ZoomUtils initialize SDK ")
+            initZoomSDK()
+        }
 
         InitAuthSDKHelper.getInstance().initSDK(this, this)
 
@@ -137,7 +142,7 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
                 intent = Intent(this, MyMeetingActivity::class.java)
                 intent.putExtra("from", MyMeetingActivity.JOIN_FROM_UNLOGIN)
             }
-            intent!!.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            intent?.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             this.startActivity(intent)
         }
     }
@@ -186,7 +191,7 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
 
         if (mInMeetingService != null) {
             meetingAudioHelper = MeetingAudioHelper(audioCallBack)
-            meetingAudioHelper!!.switchAudio()
+            meetingAudioHelper?.switchAudio()
             inMeetingAudioController = mInMeetingService?.inMeetingAudioController
         }
     }
@@ -237,8 +242,6 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
 
     override fun onDestroy() {
         super.onDestroy()
-        recognizer?.stopListening()
-        recognizer?.destroy()
         unRegisterListener()
     }
 
@@ -272,11 +275,12 @@ class JoinActivity : BaseActivity<ActivityJoinMeetingBinding, JoinViewModel>(R.l
             ZoomSDK.getInstance().meetingService.addListener(this)
             ZoomSDK.getInstance().meetingSettingsHelper.setCustomizedNotificationData(null, handle)
             binding.btnJoin.isEnabled = true
+            Toast.makeText(this, "initialize Zoom SDK - Success", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun setMiniWindows() {
-        if (null != mZoomSDK && mZoomSDK!!.isInitialized && !mZoomSDK!!.meetingSettingsHelper.isCustomizedMeetingUIEnabled) {
+        if (null != mZoomSDK && mZoomSDK?.isInitialized == true && !mZoomSDK?.meetingSettingsHelper?.isCustomizedMeetingUIEnabled!!) {
             ZoomSDK.getInstance().zoomUIService.setZoomUIDelegate(object : SimpleZoomUIDelegate() {
                 override fun afterMeetingMinimized(activity: Activity) {
                     val intent = Intent(activity, JoinActivity::class.java)

@@ -1,24 +1,19 @@
 package com.zoomstt.beta.zoombeta.share;
 
-import static com.zipow.videobox.confapp.param.ZMConfRequestConstant.REQUEST_SHARE_SCREEN_PERMISSION;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -57,14 +52,13 @@ public class MeetingShareHelper {
         boolean requestStoragePermission();
     }
 
-    private InMeetingShareController mInMeetingShareController;
+    private final InMeetingShareController mInMeetingShareController;
 
-    private InMeetingService mInMeetingService;
+    private final InMeetingService mInMeetingService;
 
-    private MeetingShareUICallBack callBack;
+    private final MeetingShareUICallBack callBack;
 
-    private Activity activity;
-    private PathAcquireTask pathAcquireTask;
+    private final Activity activity;
 
     public MeetingShareHelper(Activity activity, MeetingShareUICallBack callBack) {
         mInMeetingShareController = ZoomSDK.getInstance().getInMeetingService().getInMeetingShareController();
@@ -121,12 +115,7 @@ public class MeetingShareHelper {
     public void showOtherSharingTip() {
         new AlertDialog.Builder(activity)
                 .setTitle(R.string.alert_other_is_sharing)
-                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setNegativeButton("OK", (dialog, which) -> dialog.dismiss())
                 .create().show();
 
     }
@@ -157,9 +146,7 @@ public class MeetingShareHelper {
 
         final SimpleMenuAdapter menuAdapter = new SimpleMenuAdapter(activity);
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            menuAdapter.addItem(new SimpleMenuItem(MENU_SHARE_SCREEN, "Screen"));
-        }
+        menuAdapter.addItem(new SimpleMenuItem(MENU_SHARE_SCREEN, "Screen"));
         menuAdapter.addItem(new SimpleMenuItem(MENU_SHARE_IMAGE, "Image"));
         menuAdapter.addItem(new SimpleMenuItem(MENU_SHARE_WEBVIEW, "Web url"));
         menuAdapter.addItem(new SimpleMenuItem(MENU_WHITE_BOARD, "WhiteBoard"));
@@ -167,37 +154,34 @@ public class MeetingShareHelper {
 
         View popupWindowLayout = LayoutInflater.from(activity).inflate(R.layout.popupwindow, null);
 
-        ListView shareActions = (ListView) popupWindowLayout.findViewById(R.id.actionListView);
+        ListView shareActions = popupWindowLayout.findViewById(R.id.actionListView);
         final PopupWindow window = new PopupWindow(popupWindowLayout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.bg_transparent));
         shareActions.setAdapter(menuAdapter);
 
-        shareActions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (mInMeetingShareController.isOtherSharing()) {
-                    showOtherSharingTip();
-                    window.dismiss();
-                    return;
-                }
-
-                SimpleMenuItem item = (SimpleMenuItem) menuAdapter.getItem(position);
-                shareType = item.getAction();
-                if (shareType == MENU_SHARE_WEBVIEW) {
-                    startShareWebUrl();
-                } else if (shareType == MENU_SHARE_IMAGE) {
-                    openFileExplorer();
-                } else if (shareType == MENU_SHARE_SCREEN) {
-                    askScreenSharePermission();
-                } else if (shareType == MENU_WHITE_BOARD) {
-                    startShareWhiteBoard();
-                } else if (shareType == MENU_PDF) {
-                    openFileExplorer();
-                }
-
-                LegalNoticeDialogUtil.showChatLegalNoticeDialog(activity);
+        shareActions.setOnItemClickListener((parent, view, position, id) -> {
+            if (mInMeetingShareController.isOtherSharing()) {
+                showOtherSharingTip();
                 window.dismiss();
+                return;
             }
+
+            SimpleMenuItem item = (SimpleMenuItem) menuAdapter.getItem(position);
+            shareType = item.getAction();
+            if (shareType == MENU_SHARE_WEBVIEW) {
+                startShareWebUrl();
+            } else if (shareType == MENU_SHARE_IMAGE) {
+                openFileExplorer();
+            } else if (shareType == MENU_SHARE_SCREEN) {
+                askScreenSharePermission();
+            } else if (shareType == MENU_WHITE_BOARD) {
+                startShareWhiteBoard();
+            } else if (shareType == MENU_PDF) {
+                openFileExplorer();
+            }
+
+            LegalNoticeDialogUtil.showChatLegalNoticeDialog(activity);
+            window.dismiss();
         });
 
         window.setFocusable(true);
@@ -210,9 +194,6 @@ public class MeetingShareHelper {
 
     @SuppressLint("NewApi")
     protected void askScreenSharePermission() {
-        if (Build.VERSION.SDK_INT < 21) {
-            return;
-        }
         if (mInMeetingShareController.isOtherSharing()) {
             showOtherSharingTip();
             return;
@@ -294,20 +275,16 @@ public class MeetingShareHelper {
         if (requestCode != REQUEST_CODE_OPEN_FILE_EXPLORER) {
             return;
         }
-        String path = null;
         if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
-            pathAcquireTask = new PathAcquireTask(activity, uri, new PathAcquireTask.Callback() {
-                @Override
-                public void getPath(String path) {
-                    if (TextUtils.isEmpty(path)) {
-                        return;
-                    }
-                    if (shareType == MeetingShareHelper.MENU_SHARE_IMAGE) {
-                        startShareImage(path);
-                    } else if (shareType == MENU_PDF) {
-                        startSharePdf(path);
-                    }
+            PathAcquireTask pathAcquireTask = new PathAcquireTask(activity, uri, path -> {
+                if (TextUtils.isEmpty(path)) {
+                    return;
+                }
+                if (shareType == MeetingShareHelper.MENU_SHARE_IMAGE) {
+                    startShareImage(path);
+                } else if (shareType == MENU_PDF) {
+                    startSharePdf(path);
                 }
             });
             pathAcquireTask.execute();
@@ -348,9 +325,9 @@ public class MeetingShareHelper {
     }
 
     private static class PathAcquireTask extends AsyncTask<Void, Void, String> {
-        private Context context;
-        private Uri uri;
-        private Callback callback;
+        private final Context context;
+        private final Uri uri;
+        private final Callback callback;
         public PathAcquireTask(Context context, Uri uri, Callback callback) {
             this.context = context.getApplicationContext();
             this.uri = uri;

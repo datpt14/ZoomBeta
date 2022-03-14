@@ -167,12 +167,12 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
     private var mContext: Context? = null
     private var activity: Activity? = null
 
-    private var textSize = 16
+    private var textSize = 18
     private var transparency = 30
 
     // SignaIR
     private val listenerSeekbarFontSize = object : SeekBar.OnSeekBarChangeListener {
-        var progressFontSize = 0
+        var progressFontSize = 18
 
         override fun onProgressChanged(seekBar: SeekBar?, progressBar: Int, fromUser: Boolean) {
             progressFontSize = progressBar
@@ -260,7 +260,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
         meetingAnnotationController = mInMeetingService?.inMeetingAnnotationController
         mInMeetingChatController = mInMeetingService?.inMeetingChatController
         meetingInterpretationController = mInMeetingService?.inMeetingInterpretationController
-        mContentView!!.setOnClickListener(this)
+        mContentView?.setOnClickListener(this)
         mBottomBar = findViewById(R.id.bottom_bar)
         mTopBar = findViewById(R.id.top_bar)
 
@@ -485,22 +485,22 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
             bringToFront()
         }
         if (null != mCallBack) {
-            mCallBack!!.onHidden(hidden)
+            mCallBack?.onHidden(hidden)
         }
     }
 
-    val bottomBarHeight: Int
-        get() = mBottomBar!!.measuredHeight
-    val bottomBarBottom: Int
-        get() = mBottomBar!!.bottom
-    val bottomBarTop: Int
-        get() = mBottomBar!!.top
-    val topBarHeight: Int
-        get() = mTopBar!!.measuredHeight
+    val bottomBarHeight: Int?
+        get() = mBottomBar?.measuredHeight
+    val bottomBarBottom: Int?
+        get() = mBottomBar?.bottom
+    val bottomBarTop: Int?
+        get() = mBottomBar?.top
+    val topBarHeight: Int?
+        get() = mTopBar?.measuredHeight
 
     fun updateMeetingNumber(text: String?) {
         if (null != mMeetingNumberText) {
-            mMeetingNumberText!!.text = TemporaryDataHelper.instance().schoolName
+            mMeetingNumberText?.text = TemporaryDataHelper.instance().schoolName
         }
     }
 
@@ -513,10 +513,10 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
     fun updateMeetingUserName(text: String?) {
         if (null != mMeetingUserName) {
             if (!TextUtils.isEmpty(text)) {
-                mMeetingUserName!!.visibility = VISIBLE
-                mMeetingUserName!!.text = text
+                mMeetingUserName?.visibility = VISIBLE
+                mMeetingUserName?.text = text
             } else {
-                mMeetingUserName!!.visibility = GONE
+                mMeetingUserName?.visibility = GONE
             }
         }
     }
@@ -529,21 +529,21 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
     }
 
     fun updateAudioButton() {
-        if (mInMeetingAudioController!!.isAudioConnected) {
-            if (mInMeetingAudioController!!.isMyAudioMuted) {
-                mAudioStatusImg!!.setImageResource(R.drawable.icon_meeting_audio_mute)
+        if (mInMeetingAudioController?.isAudioConnected == true) {
+            if (mInMeetingAudioController?.isMyAudioMuted == true) {
+                mAudioStatusImg?.setImageResource(R.drawable.icon_meeting_audio_mute)
             } else {
-                mAudioStatusImg!!.setImageResource(R.drawable.icon_meeting_audio)
+                mAudioStatusImg?.setImageResource(R.drawable.icon_meeting_audio)
             }
         } else {
-            mAudioStatusImg!!.setImageResource(R.drawable.icon_meeting_noaudio)
+            mAudioStatusImg?.setImageResource(R.drawable.icon_meeting_noaudio)
         }
     }
 
     private val isMySelfWebinarAttendee: Boolean
         get() {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
-            if (myUserInfo != null && mInMeetingService!!.isWebinarMeeting) {
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
+            if (myUserInfo != null && mInMeetingService?.isWebinarMeeting == true) {
                 return myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_ATTENDEE
             }
             return false
@@ -551,32 +551,32 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
 
     fun updateShareButton() {
         if (isMySelfWebinarAttendee) {
-            mBtnShare!!.visibility = GONE
+            mBtnShare?.visibility = GONE
         } else {
-            mBtnShare!!.visibility = VISIBLE
-            if (mInMeetingShareController!!.isSharingOut) {
-                mMeetingShareText!!.text = "Stop share"
-                mShareStatusImg!!.setImageResource(R.drawable.icon_share_pause)
+            mBtnShare?.visibility = VISIBLE
+            if (mInMeetingShareController?.isSharingOut == true) {
+                mMeetingShareText?.text = "Stop share"
+                mShareStatusImg?.setImageResource(R.drawable.icon_share_pause)
             } else {
-                mMeetingShareText!!.text = "Share"
-                mShareStatusImg!!.setImageResource(R.drawable.icon_share_resume)
+                mMeetingShareText?.text = "Share"
+                mShareStatusImg?.setImageResource(R.drawable.icon_share_resume)
             }
         }
     }
 
     fun updateVideoButton() {
-        if (mInMeetingVideoController!!.isMyVideoMuted) {
-            mVideoStatusImg!!.setImageResource(R.drawable.icon_meeting_video_mute)
+        if (mInMeetingVideoController?.isMyVideoMuted == true) {
+            mVideoStatusImg?.setImageResource(R.drawable.icon_meeting_video_mute)
         } else {
-            mVideoStatusImg!!.setImageResource(R.drawable.icon_meeting_video)
+            mVideoStatusImg?.setImageResource(R.drawable.icon_meeting_video)
         }
     }
 
     fun updateSwitchCameraButton() {
-        if (mInMeetingVideoController!!.isMyVideoMuted) {
-            switchCameraView!!.visibility = GONE
+        if (mInMeetingVideoController?.isMyVideoMuted == true) {
+            switchCameraView?.visibility = GONE
         } else {
-            switchCameraView!!.visibility = VISIBLE
+            switchCameraView?.visibility = VISIBLE
         }
     }
 
@@ -609,33 +609,33 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
             }
             R.id.btnBack -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickBack()
+                    mCallBack?.onClickBack()
                 }
             }
             R.id.btnLeaveZoomMeeting -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickLeave()
+                    mCallBack?.onClickLeave()
                 }
             }
             R.id.btnShare -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickShare()
+                    mCallBack?.onClickShare()
                 }
             }
             R.id.btnCamera -> {
                 if (null != mCallBack) {
                     updateAudioButton()
-                    mCallBack!!.onClickVideo()
+                    mCallBack?.onClickVideo()
                 }
             }
             R.id.btnAudio -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickAudio()
+                    mCallBack?.onClickAudio()
                 }
             }
             R.id.btnSwitchCamera -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickSwitchCamera()
+                    mCallBack?.onClickSwitchCamera()
                 }
             }
             R.id.moreActionImg -> {
@@ -643,7 +643,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
             }
             R.id.btnChats -> {
                 if (null != mCallBack) {
-                    mCallBack!!.onClickChats()
+                    mCallBack?.onClickChats()
                 }
             }
             else -> {
@@ -654,8 +654,8 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
 
     private val isMySelfWebinarHostCohost: Boolean
         get() {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
-            if (myUserInfo != null && mInMeetingService!!.isWebinarMeeting) {
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
+            if (myUserInfo != null && mInMeetingService?.isWebinarMeeting == true) {
                 return (myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_HOST
                         || myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_COHOST)
             }
@@ -663,8 +663,8 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
         }
     private val isMySelfMeetingHostBoModerator: Boolean
         get() {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
-            if (myUserInfo != null && !mInMeetingService!!.isWebinarMeeting) {
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
+            if (myUserInfo != null && !mInMeetingService?.isWebinarMeeting!!) {
                 val role: InMeetingUserRole = myUserInfo.inMeetingUserRole
                 return role == InMeetingUserRole.USERROLE_HOST ||
                         role == InMeetingUserRole.USERROLE_BREAKOUTROOM_MODERATOR
@@ -677,22 +677,22 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
     // when live status is approved , dont show this item
     private val isShowLiveTranscriptionItem: Boolean
         get() {
-            val isInBoMeeting: Boolean = mInMeetingService!!.inMeetingBOController.isInBOMeeting
-            val inMeetingLiveTranscriptionController: InMeetingLiveTranscriptionController =
-                mInMeetingService!!.inMeetingLiveTranscriptionController
-            return (!isInBoMeeting && inMeetingLiveTranscriptionController.isLiveTranscriptionFeatureEnabled && !isMySelfHost // when client support live transcript, show this item
+            val isInBoMeeting: Boolean = mInMeetingService?.inMeetingBOController?.isInBOMeeting == true
+            val inMeetingLiveTranscriptionController: InMeetingLiveTranscriptionController? =
+                mInMeetingService?.inMeetingLiveTranscriptionController
+            return (!isInBoMeeting && inMeetingLiveTranscriptionController?.isLiveTranscriptionFeatureEnabled == true && !isMySelfHost // when client support live transcript, show this item
                     && inMeetingLiveTranscriptionController.isRequestToStartLiveTranscriptionEnabled // Webinar didn't support request LT
-                    && !mInMeetingService!!.isWebinarMeeting // when live status is approved , dont show this item
+                    && !mInMeetingService?.isWebinarMeeting!! // when live status is approved , dont show this item
                     && (inMeetingLiveTranscriptionController.liveTranscriptionStatus != InMeetingLiveTranscriptionController.MobileRTCLiveTranscriptionStatus.MobileRTC_LiveTranscription_Status_Start))
         }
 
     private val isShowStopTranscriptionItem: Boolean
         get() = isMySelfHost &&
-                ((mInMeetingService!!.inMeetingLiveTranscriptionController.liveTranscriptionStatus
+                ((mInMeetingService?.inMeetingLiveTranscriptionController?.liveTranscriptionStatus
                         == InMeetingLiveTranscriptionController.MobileRTCLiveTranscriptionStatus.MobileRTC_LiveTranscription_Status_Start))
     private val isMySelfHost: Boolean
         get() {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
             if (myUserInfo != null) {
                 return myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_HOST
             }
@@ -700,7 +700,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
         }
     private val isMySelfHostCohost: Boolean
         get() {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
             if (myUserInfo != null) {
                 return (myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_HOST
                         || myUserInfo.inMeetingUserRole == InMeetingUserRole.USERROLE_COHOST)
@@ -710,11 +710,11 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
     var virtualVideoSource: VirtualVideoSource? = null
     private fun showMoreMenuPopupWindow() {
         val menuAdapter = SimpleMenuAdapter(mContext)
-        if (mInMeetingAudioController!!.isAudioConnected) {
+        if (mInMeetingAudioController?.isAudioConnected == true) {
             menuAdapter.addItem(SimpleMenuItem(MENU_DISCONNECT_AUDIO, "Disconnect Audio"))
         }
-        if (mInMeetingAudioController!!.canSwitchAudioOutput()) {
-            if (mInMeetingAudioController!!.loudSpeakerStatus) {
+        if (mInMeetingAudioController?.canSwitchAudioOutput() == true) {
+            if (mInMeetingAudioController?.loudSpeakerStatus == true) {
                 menuAdapter.addItem(SimpleMenuItem(MENU_SPEAKER_OFF, "Speak Off"))
             } else {
                 menuAdapter.addItem(SimpleMenuItem(MENU_SPEAKER_ON, "Speak On"))
@@ -726,15 +726,15 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
                 "Paticipants"
             ))
         )
-        if (meetingAnnotationController!!.canDisableViewerAnnotation()) {
-            if (!meetingAnnotationController!!.isViewerAnnotationDisabled) {
+        if (meetingAnnotationController?.canDisableViewerAnnotation() == true) {
+            if (!meetingAnnotationController?.isViewerAnnotationDisabled!!) {
                 menuAdapter.addItem((SimpleMenuItem(MENU_ANNOTATION_OFF, "Disable Annotation")))
             } else {
                 menuAdapter.addItem((SimpleMenuItem(MENU_ANNOTATION_ON, "Enable Annotation")))
             }
         }
         if (isMySelfWebinarHostCohost) {
-            if (mInMeetingWebinarController!!.isAllowPanellistStartVideo) {
+            if (mInMeetingWebinarController?.isAllowPanellistStartVideo == true) {
                 menuAdapter.addItem(
                     (SimpleMenuItem(
                         MENU_DISALLOW_PANELIST_START_VIDEO,
@@ -749,7 +749,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
                     ))
                 )
             }
-            if (mInMeetingWebinarController!!.isAllowAttendeeChat) {
+            if (mInMeetingWebinarController?.isAllowAttendeeChat == true) {
                 menuAdapter.addItem(
                     (SimpleMenuItem(
                         MENU_DISALLOW_ATTENDEE_CHAT,
@@ -769,9 +769,9 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
 //            menuAdapter.addItem((new SimpleMenuItem(MENU_SWITCH_DOMAIN, "Switch Domain")));
         }
         if (BuildConfig.DEBUG) {
-            val myUserInfo: InMeetingUserInfo? = mInMeetingService!!.myUserInfo
-            if (myUserInfo != null && mInMeetingService!!.isWebinarMeeting) {
-                if (mInMeetingService!!.inMeetingQAController.isQAEnabled) {
+            val myUserInfo: InMeetingUserInfo? = mInMeetingService?.myUserInfo
+            if (myUserInfo != null && mInMeetingService?.isWebinarMeeting == true) {
+                if (mInMeetingService?.inMeetingQAController?.isQAEnabled == true) {
                     menuAdapter.addItem((SimpleMenuItem(MENU_ANNOTATION_QA, "QA")))
                 }
             }
@@ -798,8 +798,8 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
             }
         }
         if (isMySelfMeetingHostBoModerator) {
-            val boController: InMeetingBOController = mInMeetingService!!.inMeetingBOController
-            if (boController.isBOEnabled) {
+            val boController: InMeetingBOController? = mInMeetingService?.inMeetingBOController
+            if (boController?.isBOEnabled == true) {
                 menuAdapter.addItem((SimpleMenuItem(MENU_CREATE_BO, "Breakout Rooms")))
             }
         }
@@ -824,7 +824,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
         if (isMySelfHostCohost) {
             menuAdapter.addItem((SimpleMenuItem(MENU_LOWER_ALL_HANDS, "Lower All Hands")))
         }
-        if (mInMeetingService!!.canReclaimHost()) {
+        if (mInMeetingService?.canReclaimHost() == true) {
             menuAdapter.addItem((SimpleMenuItem(MENU_RECLAIM_HOST, "Reclaim Host")))
         }
         val popupWindowLayout: View =
@@ -843,32 +843,32 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
                 val item: SimpleMenuItem = menuAdapter.getItem(position) as SimpleMenuItem
                 when (item.action) {
                     MENU_DISCONNECT_AUDIO -> if (null != mCallBack) {
-                        mCallBack!!.onClickDisconnectAudio()
+                        mCallBack?.onClickDisconnectAudio()
                     }
                     MENU_SHOW_PLIST -> if (null != mCallBack) {
-                        mCallBack!!.onClickPlist()
+                        mCallBack?.onClickPlist()
                     }
-                    MENU_AllOW_ATTENDEE_CHAT -> mInMeetingChatController!!.allowAttendeeChat(
+                    MENU_AllOW_ATTENDEE_CHAT -> mInMeetingChatController?.allowAttendeeChat(
                         InMeetingChatController.MobileRTCWebinarChatPriviledge.All_Panelists_And_Attendees
                     )
-                    MENU_AllOW_PANELIST_START_VIDEO -> mInMeetingWebinarController!!.allowPanelistStartVideo()
-                    MENU_DISALLOW_ATTENDEE_CHAT -> mInMeetingChatController!!.allowAttendeeChat(
+                    MENU_AllOW_PANELIST_START_VIDEO -> mInMeetingWebinarController?.allowPanelistStartVideo()
+                    MENU_DISALLOW_ATTENDEE_CHAT -> mInMeetingChatController?.allowAttendeeChat(
                         InMeetingChatController.MobileRTCWebinarChatPriviledge.All_Panelists
                     )
-                    MENU_DISALLOW_PANELIST_START_VIDEO -> mInMeetingWebinarController!!.disallowPanelistStartVideo()
+                    MENU_DISALLOW_PANELIST_START_VIDEO -> mInMeetingWebinarController?.disallowPanelistStartVideo()
                     MENU_SPEAKER_OFF, MENU_SPEAKER_ON -> {
                         if (null != mCallBack) {
-                            mCallBack!!.onClickSwitchLoudSpeaker()
+                            mCallBack?.onClickSwitchLoudSpeaker()
                         }
                     }
                     MENU_ANNOTATION_ON -> {
-                        meetingAnnotationController!!.disableViewerAnnotation(false)
+                        meetingAnnotationController?.disableViewerAnnotation(false)
                     }
                     MENU_ANNOTATION_OFF -> {
-                        meetingAnnotationController!!.disableViewerAnnotation(true)
+                        meetingAnnotationController?.disableViewerAnnotation(true)
                     }
                     MENU_ANNOTATION_QA -> {
-                        mContext!!.startActivity(Intent(mContext, QAActivity::class.java))
+                        mContext?.startActivity(Intent(mContext, QAActivity::class.java))
                     }
                     MENU_SWITCH_DOMAIN -> {
                         val success: Boolean = ZoomSDK.getInstance().switchDomain("zoom.us", true)
@@ -876,17 +876,17 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
                     }
                     MENU_CREATE_BO -> {
                         if (null != mCallBack) {
-                            mCallBack!!.onClickAdminBo()
+                            mCallBack?.onClickAdminBo()
                         }
                     }
                     MENU_LOWER_ALL_HANDS -> {
                         if (null != mCallBack) {
-                            mCallBack!!.onClickLowerAllHands()
+                            mCallBack?.onClickLowerAllHands()
                         }
                     }
                     MENU_RECLAIM_HOST -> {
                         if (null != mCallBack) {
-                            mCallBack!!.onClickReclaimHost()
+                            mCallBack?.onClickReclaimHost()
                         }
                     }
                     MENU_VIRTUAL_SOURCE -> {
@@ -931,7 +931,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
                     }
                     MENU_LIVE_TRANSCRIPTION_REQUEST -> {}
                     MENU_LIVE_TRANSCRIPTION_STOP -> {
-                        mInMeetingService!!.inMeetingLiveTranscriptionController.stopLiveTranscription()
+                        mInMeetingService?.inMeetingLiveTranscriptionController?.stopLiveTranscription()
                     }
                 }
                 window.dismiss()
@@ -940,7 +940,7 @@ class MeetingOptionBar : FrameLayout, View.OnClickListener {
         window.isOutsideTouchable = true
         window.update()
         if (null != mCallBack) {
-            mCallBack!!.showMoreMenu(window)
+            mCallBack?.showMoreMenu(window)
         }
     }
 

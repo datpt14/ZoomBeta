@@ -29,39 +29,8 @@ android {
     applicationVariants.all { variant ->
         def BASE_URL = "https://raw.githubusercontent.com/"
         def SHARE_APP_URL = "https://play.google.com/store/apps/details?id="
-        def INAPP_SUB_01 = "inapp_key_sub_01"
-        def INAPP_SUB_02 = "inapp_key_sub_02"
-        def INAPP_SUB_03 = "inapp_key_sub_03"
-        def INAPP_SUB_04 = "inapp_key_sub_04"
-        def INAPP_LIFETIME = "inapp_key_life_time"
-        def ADMOB_INTERSTITIAL_ID = ""
-        def ADMOB_NATIVE_ID = ""
-        def ADMOB_BANNER_ID = ""
-        def ADMOB_REWARD_ID = ""
-        def BASE_URL_ICON = "https://raw.githubusercontent.com/matstickerdata/sticker/master/Images/"
 
-
-        if (variant.getName().contains("debug")) {
-            ADMOB_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
-            ADMOB_NATIVE_ID = "ca-app-pub-3940256099942544/2247696110"
-            ADMOB_BANNER_ID = "ca-app-pub-3940256099942544/6300978111"
-            ADMOB_REWARD_ID = "ca-app-pub-3940256099942544/5224354917"
-
-        } else if (variant.getName().contains("release")) {
-
-        }
-        variant.buildConfigField "String", "SHARE_APP_URL", "\"${SHARE_APP_URL}\""
         variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
-        variant.buildConfigField "String", "INAPP_SUB_01", "\"${INAPP_SUB_01}\""
-        variant.buildConfigField "String", "INAPP_SUB_02", "\"${INAPP_SUB_02}\""
-        variant.buildConfigField "String", "INAPP_SUB_03", "\"${INAPP_SUB_03}\""
-        variant.buildConfigField "String", "INAPP_SUB_04", "\"${INAPP_SUB_04}\""
-        variant.buildConfigField "String", "INAPP_LIFETIME", "\"${INAPP_LIFETIME}\""
-        variant.buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"${ADMOB_INTERSTITIAL_ID}\""
-        variant.buildConfigField "String", "ADMOB_NATIVE_ID", "\"${ADMOB_NATIVE_ID}\""
-        variant.buildConfigField "String", "ADMOB_BANNER_ID", "\"${ADMOB_BANNER_ID}\""
-        variant.buildConfigField "String", "ADMOB_REWARD_ID", "\"${ADMOB_REWARD_ID}\""
-        variant.buildConfigField "String", "BASE_URL_ICON", "\"${BASE_URL_ICON}\""
     }
     buildFeatures {
         dataBinding true
@@ -79,15 +48,15 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation project(path: ':commonlib')
     implementation project(path: ':mobilertc')
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -108,9 +77,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //Room
-    implementation 'androidx.room:room-rxjava2:2.4.1'
-    implementation "androidx.room:room-runtime:2.4.1"
-    kapt "androidx.room:room-compiler:2.4.1"
+    implementation 'androidx.room:room-rxjava2:2.4.2'
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
 
 
     //loading

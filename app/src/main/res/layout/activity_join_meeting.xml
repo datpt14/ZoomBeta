@@ -124,7 +124,6 @@
             android:background="@drawable/bg_bt_join"
             android:text="Join"
             android:textAllCaps="false"
-            android:enabled="false"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_20" />
     </LinearLayout>
